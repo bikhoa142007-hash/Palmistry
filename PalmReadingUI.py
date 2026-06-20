@@ -2,12 +2,11 @@ import streamlit as st
 import pandas as pd
 
 DAO_MARKS = {
-    "Sinh Đạo ": ("生 ", "Sinh "),
-    "Tâm Đạo ": ("心 ", "Tâm "),
-    "Trí Đạo ": ("智 ", "Trí "),
-    "Vận Mệnh ": ("命 ", "Mệnh "),
+    "Sinh Đạo": ("生", "Sinh"),
+    "Tâm Đạo": ("心", "Tâm"),
+    "Trí Đạo": ("智", "Trí"),
+    "Vận Mệnh": ("命", "Mệnh"),
 }
-
 THEME_CSS = """
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap');
