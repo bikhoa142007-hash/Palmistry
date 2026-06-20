@@ -303,9 +303,3 @@ class PalmReadingUI:
             )
 
 
-if __name__ == "__main__":
-    from dataprocess import PalmPredictor
-
-    predictor = PalmPredictor(model_path="best_palmline_model.keras")
-    app = PalmReadingUI(predictor=predictor)
-    app.run()
