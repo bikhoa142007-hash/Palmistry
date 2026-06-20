@@ -79,7 +79,7 @@ class PalmPredictor:
         tam_dao_desc = self._get_line_characteristic("tam_dao", pre_d2)
         van_menh_desc = self._get_line_characteristic("van_menh", pre_d4)
         advice = (
-            f"Mẫu 1: Xu hướng cân bằng, chín chắn và ổn định\n\n"
+            f"Xu hướng cân bằng, chín chắn và ổn định"
             f"Bạn là người biết cách duy trì nhịp sống hài hòa, luôn chú trọng đến sức khỏe và sự dẻo dai của bản thân nhờ đường sinh đạo {sinh_dao_desc}. "
             f"Trong tư duy, bạn có lối suy nghĩ {tri_dao_desc}, luôn cân nhắc kỹ lưỡng mọi khía cạnh trước khi đưa ra quyết định dựa trên đặc điểm của đường trí đạo. "
             f"Thế giới cảm xúc của bạn mang tính chất {tam_dao_desc}, biết cách lắng nghe và thấu hiểu người khác qua đường tâm đạo, từ đó tạo nền tảng vững chắc giúp lộ trình công danh và cuộc sống của bạn tiến triển một cách thuận lợi theo định hướng của đường định mệnh {van_menh_desc}.\n\n"
@@ -98,7 +98,7 @@ class PalmPredictor:
         tam_dao_desc = self._get_line_characteristic("tam_dao", pre_d2)
         van_menh_desc = self._get_line_characteristic("van_menh", pre_d4)
         advice = (
-            f"Mẫu 2: Xu hướng linh hoạt, thích ứng và hướng ngoại\n\n"
+            f"Xu hướng linh hoạt, thích ứng và hướng ngoại"
             f"Sở hữu một tinh thần lạc quan, năng động và khả năng phục hồi năng lượng thể chất khá tốt qua đường sinh đạo {sinh_dao_desc}, "
             f"bạn còn là người có óc sáng tạo, nhạy bén và thích nghi nhanh chóng với những thay đổi của môi trường xung quanh thể hiện ở đường trí đạo {tri_dao_desc}. "
             f"Bạn luôn sống thiên về tình cảm, {tam_dao_desc} và dễ tạo được thiện cảm lớn với những người xung quanh nhờ đường tâm đạo, "
@@ -118,7 +118,7 @@ class PalmPredictor:
         tam_dao_desc = self._get_line_characteristic("tam_dao", pre_d2)
         van_menh_desc = self._get_line_characteristic("van_menh", pre_d4)
         advice = (
-            f"Mẫu 3: Xu hướng độc lập, lý trí và kiên định\n\n"
+            f"Xu hướng độc lập, lý trí và kiên định"
             f"Bản tính bạn là người có sự độc lập cao trong cuộc sống, thích tự chủ và tự rèn luyện thể lực cũng như ý chí kiên cường qua đường sinh đạo {sinh_dao_desc}. "
             f"Bạn sở hữu một tư duy rất thực chiến, trực diện, tập trung cao độ vào những mục tiêu cụ thể và không thích sự dài dòng từ đường trí đạo {tri_dao_desc}. "
             f"Trong các mối quan hệ, bạn luôn giữ được sự tỉnh táo, lý trí và kiểm soát cảm xúc cá nhân rất tốt nhờ đường tâm đạo {tam_dao_desc}, "

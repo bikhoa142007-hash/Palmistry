@@ -2,10 +2,10 @@ import streamlit as st
 import pandas as pd
 
 DAO_MARKS = {
-    "Sinh Đạo": ("生", "Sinh"),
-    "Tâm Đạo": ("心", "Tâm"),
-    "Trí Đạo": ("智", "Trí"),
-    "Vận Mệnh": ("命", "Mệnh"),
+    "Sinh Đạo ": ("生 ", "Sinh "),
+    "Tâm Đạo ": ("心 ", "Tâm "),
+    "Trí Đạo ": ("智 ", "Trí "),
+    "Vận Mệnh ": ("命 ", "Mệnh "),
 }
 
 THEME_CSS = """
@@ -13,173 +13,197 @@ THEME_CSS = """
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap');
 
 :root{
-    --ink:#0B0E1A;
-    --panel:#13162A;
-    --panel-line:#262B45;
-    --gold:#C9A24B;
-    --gold-dim:#8A713A;
-    --parchment:#EFE6D8;
-    --parchment-dim:#A9A296;
+--ink:#0B0E1A;
+--panel:#13162A;
+--panel-line:#262B45;
+--gold:#C9A24B;
+--gold-dim:#8A713A;
+--parchment:#EFE6D8;
+--parchment-dim:#A9A296;
 }
 
 .stApp{
-    background:var(--ink);
+background:var(--ink);
 }
 .block-container{
-    max-width:560px;
-    padding-top:3rem;
-    padding-bottom:4rem;
+max-width:560px;
+padding-top:3rem;
+padding-bottom:4rem;
 }
 html, body, [class*="css"]{
-    font-family:'Be Vietnam Pro', sans-serif;
-    color:var(--parchment);
+font-family:'Be Vietnam Pro', sans-serif;
+color:var(--parchment);
 }
 
 .pr-eyebrow{
-    text-align:center;
-    letter-spacing:0.32em;
-    font-size:11px;
-    color:var(--gold-dim);
-    text-transform:uppercase;
-    margin-bottom:14px;
+text-align:center;
+letter-spacing:0.32em;
+font-size:11px;
+color:var(--gold-dim);
+text-transform:uppercase;
+margin-bottom:14px;
 }
 .pr-title{
-    font-family:'Cormorant Garamond', serif;
-    font-weight:500;
-    font-size:44px;
-    text-align:center;
-    margin:0 0 6px;
-    color:var(--parchment);
-}
+font-family:'Cormorant Garamond', serif;
+font-weight:500;
+font-size:44px;
+text-align:center;
+margin:0 0 6px;
+color:var(--parchment);
+} 
 .pr-title em{
-    font-style:normal;
-    color:var(--gold);
+font-style:normal;
+color:var(--gold);
 }
 .pr-subtitle{
-    text-align:center;
-    font-size:14px;
-    color:var(--parchment-dim);
-    font-weight:300;
-    line-height:1.6;
-    max-width:340px;
-    margin:0 auto 32px;
+text-align:center;
+font-size:14px;
+color:var(--parchment-dim);
+font-weight:300;
+line-height:1.6;
+max-width:340px;
+margin:0 auto 32px;
 }
 
 .pr-hero{ display:flex; justify-content:center; margin-bottom:8px; }
 .pr-hero svg{ width:170px; height:auto; }
 .pr-line{ fill:none; stroke:var(--gold); stroke-width:2.2; stroke-linecap:round;
-    filter:drop-shadow(0 0 3px rgba(201,162,75,0.55)); }
+filter:drop-shadow(0 0 3px rgba(201,162,75,0.55)); }
 .pr-outline{ fill:none; stroke:var(--panel-line); stroke-width:1.4; }
 
 /* tabs */
 .stTabs [data-baseweb="tab-list"]{
-    gap:0;
-    border-bottom:1px solid var(--panel-line);
-    background:transparent;
+gap:0;
+border-bottom:1px solid var(--panel-line);
+background:transparent;
 }
 .stTabs [data-baseweb="tab"]{
-    background:transparent;
-    color:var(--parchment-dim);
-    font-size:12px;
-    letter-spacing:0.12em;
-    text-transform:uppercase;
+background:transparent;
+color:var(--parchment-dim);
+font-size:12px;
+letter-spacing:0.12em;
+text-transform:uppercase;
 }
 .stTabs [aria-selected="true"]{
-    color:var(--gold) !important;
-    border-bottom:1px solid var(--gold) !important;
+color:var(--gold) !important;
+border-bottom:1px solid var(--gold) !important;
 }
 
 /* camera / uploader widgets */
 [data-testid="stCameraInput"], [data-testid="stFileUploader"]{
-    border:1px solid var(--panel-line);
-    border-radius:2px;
-    padding:14px;
-    background:var(--panel);
+border:1px solid var(--panel-line);
+border-radius:2px;
+padding:14px;
+background:var(--panel);
 }
 [data-testid="stCameraInput"] button, [data-testid="stFileUploader"] button{
-    border:1px solid var(--gold-dim) !important;
-    color:var(--gold) !important;
-    background:transparent !important;
-    letter-spacing:0.08em;
+border:1px solid var(--gold-dim) !important;
+color:var(--gold) !important;
+background:transparent !important;
+letter-spacing:0.08em;
 }
 
 /* primary analyze button */
 .stButton button[kind="primary"]{
-    width:100%;
-    background:transparent;
-    border:1px solid var(--gold-dim);
-    color:var(--gold);
-    font-size:12px;
-    letter-spacing:0.22em;
-    text-transform:uppercase;
-    padding:0.8rem 0;
+width:100%;
+background:transparent;
+border:1px solid var(--gold-dim);
+color:var(--gold);
+font-size:12px;
+letter-spacing:0.22em;
+text-transform:uppercase;
+padding:0.8rem 0;
 }
 .stButton button[kind="primary"]:hover{
-    background:var(--gold);
-    color:var(--ink);
-    border-color:var(--gold);
+background:var(--gold);
+color:var(--ink);
+border-color:var(--gold);
 }
 
 .pr-results-head{ text-align:center; margin:40px 0 24px; }
 .pr-results-head h2{
-    font-family:'Cormorant Garamond', serif;
-    font-weight:500;
-    font-size:26px;
-    margin:6px 0 0;
-    color:var(--parchment);
+font-family:'Cormorant Garamond', serif;
+font-weight:500;
+font-size:26px;
+margin:6px 0 0;
+color:var(--parchment);
 }
 
 .pr-dao{
-    display:grid;
-    grid-template-columns:64px 1fr;
-    gap:18px;
-    padding:22px 0;
-    border-top:1px solid var(--panel-line);
+display:grid;
+grid-template-columns:64px 1fr;
+gap:18px;
+padding:22px 0;
+border-top:1px solid var(--panel-line);
 }
 .pr-dao:last-child{ border-bottom:1px solid var(--panel-line); }
 .pr-dao-mark{
-    font-family:'Cormorant Garamond', serif;
-    font-size:30px;
-    color:var(--gold);
-    text-align:center;
-    line-height:1;
+font-family:'Cormorant Garamond', serif;
+font-size:30px;
+color:var(--gold);
+text-align:center;
+line-height:1;
 }
 .pr-dao-mark sub{
-    display:block;
-    font-family:'Be Vietnam Pro', sans-serif;
-    font-size:9px;
-    letter-spacing:0.1em;
-    color:var(--parchment-dim);
-    margin-top:6px;
-    text-transform:uppercase;
+display:block;
+font-family:'Be Vietnam Pro', sans-serif;
+font-size:9px;
+letter-spacing:0.1em;
+color:var(--parchment-dim);
+margin-top:6px;
+text-transform:uppercase;
 }
 .pr-dao-name{ font-size:15px; font-weight:500; color:var(--parchment); margin-bottom:6px; }
 .pr-dao-state{
-    display:inline-block;
-    font-size:10px;
-    letter-spacing:0.1em;
-    text-transform:uppercase;
-    color:var(--gold);
-    border:1px solid var(--gold-dim);
-    padding:2px 8px;
-    margin-bottom:10px;
+display:inline-block;
+font-size:10px;
+letter-spacing:0.1em;
+text-transform:uppercase;
+color:var(--gold);
+border:1px solid var(--gold-dim);
+padding:2px 8px;
+margin-bottom:10px;
 }
 .pr-dao-text{ font-size:13.5px; line-height:1.75; color:var(--parchment-dim); font-weight:300; }
+
+/* Advice section */
+.pr-advice-section{
+margin-top:40px;
+padding:28px;
+background:var(--panel);
+border-radius:4px;
+border:1px solid var(--panel-line);
+}
+.pr-advice-title{
+font-family:'Cormorant Garamond', serif;
+font-size:22px;
+color:var(--gold);
+text-align:center;
+margin-bottom:20px;
+}
+.pr-advice-content{
+font-size:13.5px;
+line-height:1.8;
+color:var(--parchment-dim);
+white-space:pre-line;
+}
+.pr-advice-content strong{
+color:var(--parchment);
+}
 </style>
 """
 
 HERO_SVG = """
 <div class="pr-hero">
 <svg viewBox="0 0 200 260" xmlns="http://www.w3.org/2000/svg">
-<path class="pr-outline" d="M70 250 C40 250 30 220 32 190 L34 110 C34 100 44 95 48 105 L52 150 L54 95 C54 84 66 84 66 95 L68 148 L70 88 C70 76 84 76 84 88 L86 148 L90 95 C90 85 102 86 102 97 L100 150 L120 115 C126 106 138 112 134 124 L114 175 C124 178 132 192 128 210 C124 232 102 250 70 250 Z" />
-<path class="pr-line" d="M44 180 C70 178 100 172 128 155" />
-<path class="pr-line" d="M50 195 C75 190 105 165 118 120" />
-<path class="pr-line" d="M58 230 C56 195 56 160 58 130" />
-<path class="pr-line" d="M82 240 C80 200 78 165 78 135" />
+<path class="pr-outline" d="M70 250 C40 250 30 220 32 190 L34 110 C34 100 44 95 48 105 L52 150 L54 95 C54 84 66 84 66 95 L68 148 L70 88 C70 76 84 76 84 88 L86 148 L90 95 C90 85 102 86 102 97 L100 150 L120 115 C126 106 138 112 134 124 L114 175 C124 178 132 192 128 210 C124 232 102 250 70 250 Z"/>
+<path class="pr-line" d="M44 180 C70 178 100 172 128 155"/>
+<path class="pr-line" d="M50 195 C75 190 105 165 118 120"/>
+<path class="pr-line" d="M58 230 C56 195 56 160 58 130"/>
+<path class="pr-line" d="M82 240 C80 200 78 165 78 135"/>
 </svg>
 </div>
 """
-
 
 class PalmReadingUI:
     def __init__(self, predictor=None):
@@ -279,27 +303,41 @@ class PalmReadingUI:
         )
 
         result = st.session_state.prediction_result
+        
 
-        if isinstance(result, pd.DataFrame) and {"Chỉ Số", "Kết Quả"}.issubset(result.columns):
-            rows = list(result.itertuples(index=False))
+        if isinstance(result, dict):
+            df = result.get("dataframe")
+            advice = result.get("advice", "")
         else:
-            rows = []
+            df = result if isinstance(result, pd.DataFrame) else None
+            advice = ""
+
+        if df is not None and isinstance(df, pd.DataFrame) and {"Chỉ Số", "Kết Quả"}.issubset(df.columns):
+            rows = list(df.itertuples(index=False))
+            
+            for row in rows:
+                name, text = row[0], row[1]
+                glyph, sub = DAO_MARKS.get(name, ("·", " "))
+                state = self._derive_state(str(text))
+                st.markdown(
+                    f'<div class="pr-dao">'
+                    f'<div class="pr-dao-mark">{glyph}<sub>{sub}</sub></div>'
+                    f'<div>'
+                    f'<div class="pr-dao-name">{name}</div>'
+                    f'<div class="pr-dao-state">{state}</div>'
+                    f'<div class="pr-dao-text">{text}</div>'
+                    f'</div>'
+                    f'</div>',
+                    unsafe_allow_html=True,
+                )
+            
+            if advice:
+                st.markdown(
+                    '<div class="pr-advice-section">'
+                    '<div class="pr-advice-title"> Lời Khuyên Dành Cho Bạn</div>'
+                    f'<div class="pr-advice-content">{advice}</div>'
+                    '</div>',
+                    unsafe_allow_html=True,
+                )
+        else:
             st.write(result)
-
-        for row in rows:
-            name, text = row[0], row[1]
-            glyph, sub = DAO_MARKS.get(name, ("·", ""))
-            state = self._derive_state(str(text))
-            st.markdown(
-                f'<div class="pr-dao">'
-                f'<div class="pr-dao-mark">{glyph}<sub>{sub}</sub></div>'
-                f'<div>'
-                f'<div class="pr-dao-name">{name}</div>'
-                f'<div class="pr-dao-state">{state}</div>'
-                f'<div class="pr-dao-text">{text}</div>'
-                f'</div>'
-                f'</div>',
-                unsafe_allow_html=True,
-            )
-
-
