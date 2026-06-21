@@ -2,14 +2,27 @@ import cv2
 import numpy as np
 import pandas as pd
 from PIL import Image
+import mediapipe as mp
 from tensorflow.keras.applications.mobilenet_v2 import preprocess_input
 from tensorflow.keras.models import load_model
 
-class PalmPredictor:
-    def __init__(self, model_path="best_palmline_model.keras"):
-        self.model = load_model(model_path)
 
-    def preprocess_for_mobilenetv2_keras(self, image_input):
+class NoHandDetectedError(Exception):
+    """Báo lỗi khi ảnh đầu vào không chứa bàn tay (vật thể khác, ảnh mờ, v.v.)."""
+    pass
+
+
+class PalmPredictor:
+    def __init__(self, model_path="best_palmline_model.keras", hand_min_confidence=0.5):
+        self.model = load_model(model_path)
+        self._mp_hands = mp.solutions.hands
+        self._hand_detector = self._mp_hands.Hands(
+            static_image_mode=True,
+            max_num_hands=1,
+            min_detection_confidence=hand_min_confidence,
+        )
+
+    def _load_rgb_image(self, image_input):
         if hasattr(image_input, "read"):
             image_input.seek(0)
             image = Image.open(image_input).convert("RGB")
@@ -19,13 +32,20 @@ class PalmPredictor:
             if img is None:
                 raise ValueError(f"khong the doc anh tai duong dan: {image_input}")
             img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+        return img_rgb
+
+    def is_hand_present(self, img_rgb):
+        result = self._hand_detector.process(img_rgb)
+        return bool(result.multi_hand_landmarks)
+
+    def preprocess_for_mobilenetv2_keras(self, img_rgb):
         img_resized = cv2.resize(img_rgb, (224, 224))
         img_array = np.expand_dims(img_resized, axis=0)
         img_preprocessed = preprocess_input(img_array)
         return img_preprocessed
 
-    def predict_palm_lines(self, image_input):
-        img = self.preprocess_for_mobilenetv2_keras(image_input)
+    def predict_palm_lines(self, img_rgb):
+        img = self.preprocess_for_mobilenetv2_keras(img_rgb)
         predictions = self.model.predict(img)
         pre_d1 = np.argmax(predictions[0])
         pre_d2 = np.argmax(predictions[1])
@@ -149,7 +169,15 @@ class PalmPredictor:
         return advice
 
     def predict(self, image_input):
-        predictions = self.predict_palm_lines(image_input)
+        img_rgb = self._load_rgb_image(image_input)
+
+        if not self.is_hand_present(img_rgb):
+            raise NoHandDetectedError(
+                "Không phát hiện được bàn tay trong ảnh. "
+                "Vui lòng chụp bàn tay rõ ràng, đủ ánh sáng và không bị che khuất."
+            )
+
+        predictions = self.predict_palm_lines(img_rgb)
         meanings = self.map_predictions_to_meanings(predictions)
         advice = self.generate_advice(predictions)
         df = pd.DataFrame(list(meanings.items()), columns=["Chỉ Số", "Kết Quả"])
