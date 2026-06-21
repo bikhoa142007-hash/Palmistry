@@ -1,6 +1,7 @@
 import streamlit as st
 from dataprocess import PalmPredictor
 from PalmReadingUI import PalmReadingUI
+from dataprocess import NoHand
 
 if __name__ == "__main__":
     predictor = PalmPredictor("best_palmline_model.keras")
