@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-from dataprocess import NoHandDetectedError
 
 DAO_MARKS = {
     "Sinh Đạo": ("生", "Sinh"),
@@ -281,9 +280,6 @@ class PalmReadingUI:
             try:
                 result = self.predictor.predict(st.session_state.palm_image)
                 st.session_state.prediction_result = result
-            except NoHandDetectedError:
-                st.session_state.prediction_result = None
-                st.warning("Không nhận diện được bàn tay trong ảnh. Vui lòng chụp bàn tay rõ ràng, đủ ánh sáng và thử lại.")
             except Exception as e:
                 st.error(f"Lỗi: {str(e)}")
 
